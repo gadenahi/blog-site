@@ -2,7 +2,7 @@
 This module is to run application for flaskblog
 """
 
-from flaskblog import create_app
+from flaskblog import db, create_app
 
 
 app = create_app()
@@ -16,6 +16,10 @@ app = create_app()
 
 
 if __name__ == '__main__':
+    app = create_app()
+    ctx = app.app_context()
+    ctx.push()
+    db.create_all()
     app.run(debug=True)
 
 
