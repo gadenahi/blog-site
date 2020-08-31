@@ -83,5 +83,5 @@ class Post(db.Model):
         return "Post('{}', '{}')".format(self.title, self.date_posted)
 
 
-def init():
-    db.create_all()
+# def init():
+#     db.create_all()
