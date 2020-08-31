@@ -1,0 +1,48 @@
+{% if year_dict and month_dict %}
+<div class="archive-module-body">
+    <ul class="archive-urllist">
+        <div class="archive-recent-posts">
+        <h3 class="archive-title">Recent Posts</h3>
+        {% for post in side_posts %}
+        <article class="media archive-section">
+            <img class="rounded-circle archive-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" >
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                </div>
+                <h4><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h4>
+            </div>
+        </article>
+        {% endfor %}
+        </div>
+        <div class="archive-month-archive">
+        <h3 class="archive-title">Monthly Archive</h3>
+        {% for year, ytotal in year_dict.items() %}
+        <li class="archive-module-year" data-year=year>
+         <div class="archive-year">
+            <span class="archive-module-hide-button">▼</span>
+            <span class="archive-module-show-button">▶</span>
+         <a class="article-content" href="{{ url_for('side.date_posts', filter_date=year) }}">
+             {{ year }} ({{ ytotal }})
+          </a>
+         </div>
+         <div class="archive-month">
+         {% for month, mtotal in month_dict.items() %}
+            {% if year in month %}
+          <ul class="archive-module-months">
+              <li class="archive-module-month">
+                <a class="article-content" href="{{ url_for('side.date_posts', filter_date=month) }}" >
+                    ・{{ month }} ({{ mtotal }})
+                </a>
+              </li>
+          </ul>
+            {% endif %}
+          </div>
+          </div>
+        </li>
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
