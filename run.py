@@ -11,15 +11,12 @@ app = create_app()
 
 # manager = Manager(app)
 # @manager.command
-# def init_db():
-#     db.create_all()
-
 
 if __name__ == '__main__':
-    app = create_app()
-    ctx = app.app_context()
-    ctx.push()
-    db.create_all()
+    # app = create_app()
+    # ctx = app.app_context()
+    # ctx.push()
+    # db.create_all()
     app.run(debug=True)
 
 
