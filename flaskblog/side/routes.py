@@ -43,11 +43,13 @@ def date_posts(filter_date, start_month=1, end_month=12):
     # To get the last date by month automatically
     last_day = calendar.monthrange(int(year), int(start_month))[1]
     # To set the end date for the filter
-    end = datetime(year=int(year), month=int(end_month), day=int(last_day))
+    end = datetime(year=int(year), month=int(end_month), day=int(last_day),
+                   hour=23, minute=59, second=59)
     posts = Post.query.filter(Post.date_posted <= end)\
         .filter(Post.date_posted >= start)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=5)
+
     year_dict, month_dict = get_postdates()
     # if month filter, need to return year and month with year parameter
     if not re_pattern.match(filter_date):
